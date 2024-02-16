@@ -1,13 +1,15 @@
-import { useDispatch, useSelector } from "react-redux"
-import { updateTodo, removeTodo } from "../features/todo/todoSlice"
+import { useDispatch } from "react-redux"
+import { updateTodo, removeTodo, updateStatus } from "../features/todo/todoSlice"
 import { useState } from "react"
 
 function TodoItem({todo}) {
     // console.log(todo);
     // const todos = useSelector(state => state.todos)
+
     const dispatch = useDispatch()
 
     const [todoText, setTodoText] = useState(todo.text)
+    // const [todoStatus, setTodoStatus] = useState(todo.completed)
     const [isTodoEditable, setIsTodoEditable] = useState(false)
 
     // const handleUpdate = (e) => {
@@ -20,9 +22,12 @@ function TodoItem({todo}) {
             <input
                 type="checkbox"
                 className="cursor-pointer"
-                // checked={todo.completed}
-                // onChange={toggleCompleted}
-                // onClick={() => updateStatus(todo.id)}
+                checked={todo.completed}
+                onChange={() => (
+                    dispatch(updateStatus(todo.id)
+                    // setTodoStatus(prev => !prev)
+                ))}
+                // onClick={() => dispatch(updateStatus(todo.id))}
             />
             <input className={`border outline-none w-full bg-transparent rounded-lg ${
                             isTodoEditable ? "border-black/10 px-2" : "border-transparent"

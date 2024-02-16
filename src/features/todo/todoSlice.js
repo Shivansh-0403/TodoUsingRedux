@@ -34,16 +34,26 @@ export const todoSlice = createSlice({
         updateTodo: (state, action) => {
             console.log(action.payload.id + " " + action.payload.text)
             state.todos.map((item) => {
-                if (item.id === action.payload.id){
-                    item.text = action.payload.text
-                }
-                console.log(item.text);
+                // if (item.id === action.payload.id){
+                item.id === action.payload.id ? 
+                    item.text = action.payload.text : null
+                // }
+                // console.log(item.text);
             })
         },
+        updateStatus: (state, action) => {
+            state.todos.map((item) => {
+                // if (item.id === action.payload.id){
+                item.id === action.payload ? 
+                    item.completed = !item.completed : null
+                // }
+                // console.log(item.text);
+            })
+        }
     }
 })
 
-export const {addTodo, removeTodo, updateTodo} = todoSlice.actions
+export const {addTodo, removeTodo, updateTodo, updateStatus} = todoSlice.actions
 
 // Selector -> How we get the data from our global state
 // export const selectTodos = (state) => state.todo.todos;
